@@ -1,0 +1,47 @@
+{
+    "name": "@adkit/meta-pixel",
+    "version": "1.2.1",
+    "description": "Platform-agnostic Meta Pixel tracking wrapper with TypeScript support",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/adkit/ads-tracking.git",
+        "directory": "packages/js/meta-pixel"
+    },
+    "type": "module",
+    "main": "./dist/index.mjs",
+    "module": "./dist/index.mjs",
+    "types": "./dist/index.d.ts",
+    "exports": {
+        ".": {
+            "import": "./dist/index.mjs",
+            "types": "./dist/index.d.ts"
+        }
+    },
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "build": "unbuild",
+        "test": "npm run build && node --test test/*.test.mjs",
+        "typecheck": "tsc --noEmit",
+        "prepack": "npm run build",
+        "test:watch": "node --test --watch test/*.test.mjs"
+    },
+    "keywords": [
+        "meta",
+        "facebook",
+        "pixel",
+        "tracking",
+        "analytics",
+        "typescript"
+    ],
+    "author": "",
+    "license": "MIT",
+    "publishConfig": {
+        "access": "public"
+    },
+    "devDependencies": {
+        "typescript": "^5.3.3",
+        "unbuild": "^2.0.0"
+    }
+}

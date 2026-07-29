@@ -1,0 +1,27 @@
+{
+  "name": "@adkit/ads-tracking-monorepo",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "packages/js/google-ads-tracking",
+    "packages/js/meta-pixel",
+    "packages/react/meta-pixel",
+    "packages/next/meta-pixel",
+    "packages/nuxt/meta-pixel"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "check": "npm run build && npm test && npm run typecheck",
+    "changeset": "changeset",
+    "version-packages": "changeset version"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.29.7",
+    "@types/node": "^22.13.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "private": true,
+  "name": "meta-pixel-nuxt-playground",
+  "type": "module",
+  "scripts": {
+    "dev": "nuxi dev",
+    "build": "nuxi build",
+    "generate": "nuxi generate"
+  },
+  "dependencies": {
+    "nuxt": "^4.2.1",
+    "@nuxt/ui": "^2.18.4"
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "name": "@adkit/meta-pixel-next",
+  "version": "1.1.1",
+  "description": "Next.js integration for Meta Pixel tracking - auto PageView on route changes",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adkit/ads-tracking.git",
+    "directory": "packages/next/meta-pixel"
+  },
+  "type": "module",
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "unbuild",
+    "typecheck": "tsc --noEmit",
+    "dev": "cd playground && npm run dev -- -p 3333",
+    "prepack": "npm run build",
+    "test": "vitest run",
+    "test:e2e": "playwright test --config test/playwright.config.ts",
+    "test:ui": "playwright test --config test/playwright.config.ts --ui"
+  },
+  "keywords": [
+    "meta",
+    "facebook",
+    "pixel",
+    "tracking",
+    "analytics",
+    "nextjs",
+    "next",
+    "react",
+    "typescript"
+  ],
+  "author": "",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "next": ">=13.0.0",
+    "react": ">=18.0.0"
+  },
+  "dependencies": {
+    "@adkit/meta-pixel-react": "^1.1.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.56.1",
+    "@testing-library/react": "^14.1.2",
+    "@types/react": "^18.2.0",
+    "@vitejs/plugin-react": "^4.2.1",
+    "happy-dom": "^12.10.3",
+    "next": "^14.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "typescript": "^5.3.3",
+    "unbuild": "^2.0.0",
+    "vitest": "^1.0.4"
+  }
+}

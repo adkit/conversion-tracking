@@ -1,0 +1,54 @@
+{
+    "name": "@adkit/google-ads-tracking",
+    "version": "1.1.1",
+    "description": "Google Ads conversion tracking for JavaScript and TypeScript. Zero-dependency gtag.js wrapper with eager, lazy, and manual script loading.",
+    "homepage": "https://adkit.so",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/adkit/ads-tracking.git",
+        "directory": "packages/js/google-ads-tracking"
+    },
+    "type": "module",
+    "main": "./dist/index.mjs",
+    "module": "./dist/index.mjs",
+    "types": "./dist/index.d.ts",
+    "exports": {
+        ".": {
+            "import": "./dist/index.mjs",
+            "types": "./dist/index.d.ts"
+        }
+    },
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "build": "unbuild",
+        "typecheck": "tsc --noEmit",
+        "test": "vitest run",
+        "test:watch": "vitest",
+        "prepack": "npm run build"
+    },
+    "keywords": [
+        "google-ads",
+        "conversion-tracking",
+        "google-ads-conversion-tracking",
+        "gtag",
+        "gtagjs",
+        "google-tag",
+        "tracking",
+        "analytics",
+        "typescript",
+        "javascript"
+    ],
+    "author": "",
+    "license": "MIT",
+    "publishConfig": {
+        "access": "public"
+    },
+    "devDependencies": {
+        "jsdom": "^24.0.0",
+        "typescript": "^5.9.3",
+        "unbuild": "^3.6.1",
+        "vitest": "^3.2.7"
+    }
+}
