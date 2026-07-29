@@ -264,7 +264,12 @@ gtag.js is always loaded `async`, and the wrapper itself is 1.2 KB gzipped. With
 
 ## Related packages
 
-- [`@adkit.so/meta-pixel`](https://www.npmjs.com/package/@adkit.so/meta-pixel): Meta (Facebook) Pixel tracking with the same wrapper approach.
+The Meta (Facebook) Pixel family uses the same wrapper approach:
+
+- [`@adkit/meta-pixel`](https://www.npmjs.com/package/@adkit/meta-pixel): JavaScript and TypeScript
+- [`@adkit/meta-pixel-react`](https://www.npmjs.com/package/@adkit/meta-pixel-react): React
+- [`@adkit/meta-pixel-next`](https://www.npmjs.com/package/@adkit/meta-pixel-next): Next.js
+- [`@adkit/meta-pixel-nuxt`](https://www.npmjs.com/package/@adkit/meta-pixel-nuxt): Nuxt
 
 ## License
 

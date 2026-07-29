@@ -1,12 +1,12 @@
-# Meta Pixel for Nuxt
+# Meta (Facebook) Pixel for Nuxt
+
+Add the Meta Pixel to your Nuxt 3 or 4 app with one module and an auto-imported `useMetaPixel()` composable. Type-safe events, per-route tracking control, event deduplication for the Conversions API, and lazy script loading that keeps fbevents.js off your critical path.
 
 [![npm version](https://img.shields.io/npm/v/@adkit/meta-pixel-nuxt.svg)](https://www.npmjs.com/package/@adkit/meta-pixel-nuxt)
 [![npm downloads](https://img.shields.io/npm/dm/@adkit/meta-pixel-nuxt.svg)](https://www.npmjs.com/package/@adkit/meta-pixel-nuxt)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-> The most powerful and developer-friendly Meta Pixel integration for Nuxt 3 & 4.
-
-Built on top of [@adkit/meta-pixel](https://www.npmjs.com/package/@adkit/meta-pixel), this module provides a seamless, type-safe Meta Pixel experience with advanced features like route control, event deduplication, and beautiful debug logging.
+Built on [@adkit/meta-pixel](https://www.npmjs.com/package/@adkit/meta-pixel), the framework-independent core.
 
 ## 📚 Table of Contents
 
@@ -608,6 +608,10 @@ All methods, events, and parameters have complete TypeScript definitions with In
 
 ## ❓ Troubleshooting
 
+### Does the Facebook Pixel slow down my Nuxt app?
+
+fbevents.js is loaded `async`, so it doesn't block HTML parsing. To keep the download out of your Core Web Vitals window entirely, set `loadMode: 'lazy'` in the module options: the event queue is created immediately, but the script only downloads after the page `load` event, at the browser's next idle moment. Events fired in the meantime are queued and sent once the script arrives.
+
 ### Pixel not loading?
 
 1. **Check your pixel ID** - Make sure it's correct in your config
@@ -707,4 +711,4 @@ MIT
 
 **Made with ❤️ by [Adkit](https://adkit.so)**
 
-If this package helped you, please consider giving it a ⭐️ on [GitHub](https://github.com/adkit/ads-tracking)!
+If this package helped you, please consider giving it a ⭐️ on [GitHub](https://github.com/adkit/conversion-tracking)!

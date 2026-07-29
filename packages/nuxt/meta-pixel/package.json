@@ -1,10 +1,25 @@
 {
   "name": "@adkit/meta-pixel-nuxt",
   "version": "1.1.1",
-  "description": "Nuxt 3 & 4 module for Meta Pixel tracking, built on top of @adkit/meta-pixel",
+  "description": "Meta (Facebook) Pixel module for Nuxt 3 and 4. Auto-imported composable, per-route tracking control, and lazy script loading.",
+  "homepage": "https://adkit.so",
+  "keywords": [
+    "meta-pixel",
+    "facebook-pixel",
+    "nuxt-facebook-pixel",
+    "meta",
+    "facebook",
+    "pixel",
+    "conversion-tracking",
+    "tracking",
+    "analytics",
+    "nuxt",
+    "nuxt-module",
+    "typescript"
+  ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/adkit/ads-tracking.git",
+    "url": "git+https://github.com/adkit/conversion-tracking.git",
     "directory": "packages/nuxt/meta-pixel"
   },
   "license": "MIT",

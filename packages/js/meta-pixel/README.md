@@ -1,12 +1,12 @@
-# Meta Pixel (JS/TS)
+# Meta (Facebook) Pixel for JavaScript & TypeScript
+
+Add the Meta Pixel to any JavaScript or TypeScript app without pasting Facebook's snippet. A type-safe fbevents.js wrapper with eager, lazy, and manual script loading: events fired before the script downloads are queued, not lost.
 
 [![npm version](https://img.shields.io/npm/v/@adkit/meta-pixel.svg)](https://www.npmjs.com/package/@adkit/meta-pixel)
 [![npm downloads](https://img.shields.io/npm/dm/@adkit/meta-pixel.svg)](https://www.npmjs.com/package/@adkit/meta-pixel)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-> The most powerful and developer-friendly Meta Pixel integration for JavaScript & TypeScript applications.
-
-A platform-agnostic wrapper for Meta Pixel that provides a seamless, type-safe experience with advanced features like event deduplication, multiple pixel support, and beautiful debug logging.
+Supports all 18 standard events with autocomplete, custom events, event deduplication for the Conversions API, and multiple pixels. Dedicated packages exist for [React](https://www.npmjs.com/package/@adkit/meta-pixel-react), [Next.js](https://www.npmjs.com/package/@adkit/meta-pixel-next), and [Nuxt](https://www.npmjs.com/package/@adkit/meta-pixel-nuxt).
 
 ## 📚 Table of Contents
 
@@ -48,8 +48,6 @@ META.init({ pixelIds: 'YOUR_PIXEL_ID' });
 // 2. Track events
 META.track('Purchase', { value: 99.99, currency: 'USD' });
 ```
-
-That's it! 🎉
 
 ## 📦 Installation
 
@@ -258,6 +256,10 @@ const eventData: EventData = {
 
 ## ❓ Troubleshooting
 
+### Does the Meta Pixel slow down my website?
+
+fbevents.js is loaded `async`, so it doesn't block HTML parsing. To keep the download out of your Core Web Vitals window entirely, set `loadMode: 'lazy'`: the event queue is created immediately, but the script only downloads after the page `load` event, at the browser's next idle moment. Events fired in the meantime are queued and sent once the script arrives.
+
 ### Pixel not loading?
 
 1. **Check your pixel ID** - Make sure it's correct in your config
@@ -308,4 +310,4 @@ MIT
 
 **Made with ❤️ by [Adkit](https://adkit.so)**
 
-If this package helped you, please consider giving it a ⭐️ on [GitHub](https://github.com/adkit/ads-tracking)!
+If this package helped you, please consider giving it a ⭐️ on [GitHub](https://github.com/adkit/conversion-tracking)!

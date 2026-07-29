@@ -1,5 +1,5 @@
 {
-  "name": "@adkit/ads-tracking-monorepo",
+  "name": "@adkit/conversion-tracking-monorepo",
   "private": true,
   "type": "module",
   "workspaces": [

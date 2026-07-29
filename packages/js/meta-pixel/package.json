@@ -1,10 +1,11 @@
 {
     "name": "@adkit/meta-pixel",
     "version": "1.2.1",
-    "description": "Platform-agnostic Meta Pixel tracking wrapper with TypeScript support",
+    "description": "Meta (Facebook) Pixel for JavaScript and TypeScript. Type-safe fbevents.js wrapper with eager, lazy, and manual script loading, event deduplication, and multiple pixels.",
+    "homepage": "https://adkit.so",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/adkit/ads-tracking.git",
+        "url": "git+https://github.com/adkit/conversion-tracking.git",
         "directory": "packages/js/meta-pixel"
     },
     "type": "module",
@@ -28,12 +29,16 @@
         "test:watch": "node --test --watch test/*.test.mjs"
     },
     "keywords": [
+        "meta-pixel",
+        "facebook-pixel",
         "meta",
         "facebook",
         "pixel",
+        "conversion-tracking",
         "tracking",
         "analytics",
-        "typescript"
+        "typescript",
+        "javascript"
     ],
     "author": "",
     "license": "MIT",

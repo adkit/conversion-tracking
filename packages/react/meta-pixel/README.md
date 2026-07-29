@@ -1,12 +1,12 @@
-# Meta Pixel for React
+# Meta (Facebook) Pixel for React
+
+Add the Meta Pixel to your React app with a Provider and a hook instead of Facebook's copy-paste snippet. Type-safe standard and custom events, event deduplication for the Conversions API, and lazy script loading that keeps fbevents.js off your critical path.
 
 [![npm version](https://img.shields.io/npm/v/@adkit/meta-pixel-react.svg)](https://www.npmjs.com/package/@adkit/meta-pixel-react)
 [![npm downloads](https://img.shields.io/npm/dm/@adkit/meta-pixel-react.svg)](https://www.npmjs.com/package/@adkit/meta-pixel-react)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-> The most powerful and developer-friendly Meta Pixel integration for React.
-
-Built on top of [@adkit/meta-pixel](https://www.npmjs.com/package/@adkit/meta-pixel), this package provides a seamless, type-safe Meta Pixel experience with advanced features like event deduplication, multiple pixel support, and beautiful debug logging.
+Built on [@adkit/meta-pixel](https://www.npmjs.com/package/@adkit/meta-pixel), the framework-independent core.
 
 ## 📚 Table of Contents
 
@@ -131,8 +131,6 @@ function ProductPage() {
   return <button onClick={handlePurchase}>Buy Now</button>
 }
 ```
-
-That's it! 🎉
 
 ## 📦 Installation
 
@@ -732,6 +730,10 @@ All methods, events, and parameters have complete TypeScript definitions with In
 
 ## ❓ Troubleshooting
 
+### Does the Facebook Pixel slow down my React app?
+
+fbevents.js is loaded `async`, so it doesn't block HTML parsing. To keep the download out of your Core Web Vitals window entirely, pass `loadMode="lazy"` to the Provider: the event queue is created immediately, but the script only downloads after the page `load` event, at the browser's next idle moment. Events fired in the meantime are queued and sent once the script arrives.
+
 ### Pixel not loading?
 
 1. **Check your pixel ID** - Make sure it's correct in your config
@@ -817,4 +819,4 @@ MIT
 
 **Made with ❤️ by [Adkit](https://adkit.so)**
 
-If this package helped you, please consider giving it a ⭐️ on [GitHub](https://github.com/adkit/ads-tracking)!
+If this package helped you, please consider giving it a ⭐️ on [GitHub](https://github.com/adkit/conversion-tracking)!

@@ -1,10 +1,11 @@
 {
   "name": "@adkit/meta-pixel-react",
   "version": "1.1.1",
-  "description": "React wrapper for Meta Pixel tracking with TypeScript support",
+  "description": "Meta (Facebook) Pixel for React. Provider and hook with type-safe events, Conversions API deduplication, and lazy script loading.",
+  "homepage": "https://adkit.so",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/adkit/ads-tracking.git",
+    "url": "git+https://github.com/adkit/conversion-tracking.git",
     "directory": "packages/react/meta-pixel"
   },
   "type": "module",
@@ -33,9 +34,13 @@
     "test:unit:watch": "vitest watch --config test/vitest.config.ts"
   },
   "keywords": [
+    "meta-pixel",
+    "facebook-pixel",
+    "react-facebook-pixel",
     "meta",
     "facebook",
     "pixel",
+    "conversion-tracking",
     "tracking",
     "analytics",
     "react",

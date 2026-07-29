@@ -1,6 +1,6 @@
-# AdKit Ads Tracking
+# AdKit Ads Tracking: Google Ads Conversion Tracking and Meta Pixel for JavaScript
 
-Open-source conversion tracking libraries for JavaScript and TypeScript. One typed, zero-dependency wrapper per ad platform: Google Ads (gtag.js) today, the Meta Pixel packages for React, Next.js, and Nuxt next, more platforms after that.
+Open-source conversion tracking libraries for JavaScript and TypeScript. One typed, zero-dependency wrapper per ad platform: Google Ads (gtag.js) and the Meta (Facebook) Pixel, with dedicated packages for React, Next.js, and Nuxt. More platforms will follow.
 
 ## Packages
 
@@ -25,6 +25,12 @@ Each wrapper in this repo fixes that the same way:
 - **Typed API.** Config and conversion parameters are TypeScript types, so mistakes fail at compile time instead of silently dropping data.
 - **Safe defaults.** Tracking is off on localhost by default, and `init()` is a no-op during server-side rendering. Importing a wrapper in Next.js or Nuxt server code won't crash.
 
+## How the wrappers avoid losing conversions
+
+Google's and Meta's snippets both work the same way: a small inline queue (`dataLayer` for gtag.js, `fbq.queue` for the Pixel) collects tracking commands until the real script downloads and replays them. These wrappers install that queue synchronously during `init()`, in every loading mode.
+
+Tracking calls made before the vendor script arrives sit in the queue in call order, and if the download fails, the queue is kept so loading can be retried. No conversion call is thrown away.
+
 ## Google Ads conversion tracking
 
 [`@adkit/google-ads-tracking`](./packages/js/google-ads-tracking) tracks Google Ads conversions from any JavaScript or TypeScript app. It wraps `gtag.js` in 1.2 KB gzipped with eager, lazy, and manual script loading.
@@ -42,9 +48,9 @@ GOOGLE.trackConversion('AW-XXXXXXXXXX/CONVERSION_LABEL', { value: 29.99, currenc
 
 Works with React, Next.js, Vue, Nuxt, and plain JavaScript. Full docs, loading modes, and framework examples are in the [package README](./packages/js/google-ads-tracking).
 
-## Meta Pixel tracking
+## Meta (Facebook) Pixel conversion tracking
 
-The Meta Pixel package family provides one core JavaScript client plus dedicated integrations for React, Next.js, and Nuxt. All four packages support eager, lazy, and manual vendor-script loading.
+The Meta Pixel family is one core JavaScript client plus dedicated integrations for React, Next.js, and Nuxt. All four packages ship typed standard and custom events, event deduplication for the Conversions API, and eager, lazy, and manual loading of `fbevents.js`.
 
 Start with the package matching your application:
 
@@ -53,11 +59,38 @@ Start with the package matching your application:
 - [`@adkit/meta-pixel-next`](./packages/next/meta-pixel): Next.js
 - [`@adkit/meta-pixel-nuxt`](./packages/nuxt/meta-pixel): Nuxt
 
+```bash
+npm install @adkit/meta-pixel-react
+```
+
+```tsx
+import { MetaPixelProvider, useMetaPixel } from '@adkit/meta-pixel-react';
+
+// Wrap your app once
+<MetaPixelProvider pixelIds="YOUR_PIXEL_ID" loadMode="lazy">
+    <App />
+</MetaPixelProvider>;
+
+// Track events anywhere
+const meta = useMetaPixel();
+meta.track('Purchase', { value: 99.99, currency: 'USD' });
+```
+
+For the setup on Meta's side (creating the pixel, finding your pixel ID), see [How to install the Meta Pixel](https://adkit.so/resources/how-to-install-meta-pixel).
+
 ## FAQ
 
 ### Do these work with React, Next.js, Vue, and Nuxt?
 
 Yes. The wrappers are framework-agnostic: initialize once in your entry point (or a client-only plugin in SSR frameworks) and call the tracking methods from anywhere. Each package README shows the exact setup per framework.
+
+### How do I track Google Ads conversions in React?
+
+Install `@adkit/google-ads-tracking`, call `GOOGLE.init({ tagId: 'AW-...' })` once in your entry point, and call `GOOGLE.trackConversion()` from your event handlers. The [package README](./packages/js/google-ads-tracking) has snippets for React, Next.js, Vue, and Nuxt.
+
+### How do I add the Facebook Pixel to Next.js?
+
+Install `@adkit/meta-pixel-next` and drop `<MetaPixel pixelId="..." />` into your root layout. PageView is tracked automatically on route changes. Setup details are in the [package README](./packages/next/meta-pixel).
 
 ### Are conversions lost if the tracking script loads late?
 
@@ -70,6 +103,10 @@ Yes. Use manual loading mode: `init()` prepares the queue, and you call `load()`
 ### Do I need Google Tag Manager or a tag manager at all?
 
 No. Each wrapper loads the platform's own script directly. If you already run a tag manager and fire conversions there, you don't need these packages.
+
+### Do tracking scripts slow down my site?
+
+The vendor scripts (`gtag.js`, `fbevents.js`) are always loaded `async`, so they don't block HTML parsing. With lazy mode they aren't even requested until after the page `load` event, at the browser's next idle moment, which keeps them out of your Core Web Vitals window. The wrappers themselves add about 1 KB gzipped.
 
 ## Why one repository?
 

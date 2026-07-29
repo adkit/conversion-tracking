@@ -1,10 +1,11 @@
 {
   "name": "@adkit/meta-pixel-next",
   "version": "1.1.1",
-  "description": "Next.js integration for Meta Pixel tracking - auto PageView on route changes",
+  "description": "Meta (Facebook) Pixel for Next.js. Drop-in component with automatic PageView tracking on route changes, App Router support, and lazy script loading.",
+  "homepage": "https://adkit.so",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/adkit/ads-tracking.git",
+    "url": "git+https://github.com/adkit/conversion-tracking.git",
     "directory": "packages/next/meta-pixel"
   },
   "type": "module",
@@ -30,9 +31,13 @@
     "test:ui": "playwright test --config test/playwright.config.ts --ui"
   },
   "keywords": [
+    "meta-pixel",
+    "facebook-pixel",
+    "nextjs-facebook-pixel",
     "meta",
     "facebook",
     "pixel",
+    "conversion-tracking",
     "tracking",
     "analytics",
     "nextjs",

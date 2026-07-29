@@ -1,12 +1,12 @@
-# Meta Pixel for Next.js
+# Meta (Facebook) Pixel for Next.js
+
+Add the Meta Pixel to your Next.js app with one component and get automatic PageView tracking on route changes. Type-safe events, `NEXT_PUBLIC_META_PIXEL_ID` support, App Router ready, and lazy script loading that keeps fbevents.js off your critical path.
 
 [![npm version](https://img.shields.io/npm/v/@adkit/meta-pixel-next.svg)](https://www.npmjs.com/package/@adkit/meta-pixel-next)
 [![npm downloads](https://img.shields.io/npm/dm/@adkit/meta-pixel-next.svg)](https://www.npmjs.com/package/@adkit/meta-pixel-next)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-> The simplest Meta Pixel integration for Next.js — with automatic PageView tracking on route changes.
-
-Built on top of [@adkit/meta-pixel-react](https://www.npmjs.com/package/@adkit/meta-pixel-react), this package provides a drop-in component that handles everything automatically.
+Built on [@adkit/meta-pixel-react](https://www.npmjs.com/package/@adkit/meta-pixel-react); the `<MetaPixel />` component handles initialization and route tracking for you.
 
 ## 📚 Table of Contents
 
@@ -331,6 +331,10 @@ Enable `debug={true}` to see styled console logs:
 
 ## ❓ Troubleshooting
 
+### Does the Facebook Pixel slow down my Next.js app?
+
+fbevents.js is loaded `async`, so it doesn't block HTML parsing. To keep the download out of your Core Web Vitals window entirely, pass `loadMode="lazy"` to `<MetaPixel />`: the event queue is created immediately, but the script only downloads after the page `load` event, at the browser's next idle moment. Events fired in the meantime are queued and sent once the script arrives.
+
 ### Pixel not loading?
 
 1. **Check your pixel ID** - Verify it's correct
@@ -372,4 +376,4 @@ MIT
 
 **Made with ❤️ by [Adkit](https://adkit.so)**
 
-If this package helped you, please consider giving it a ⭐️ on [GitHub](https://github.com/adkit/ads-tracking)!
+If this package helped you, please consider giving it a ⭐️ on [GitHub](https://github.com/adkit/conversion-tracking)!

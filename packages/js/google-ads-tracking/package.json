@@ -5,7 +5,7 @@
     "homepage": "https://adkit.so",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/adkit/ads-tracking.git",
+        "url": "git+https://github.com/adkit/conversion-tracking.git",
         "directory": "packages/js/google-ads-tracking"
     },
     "type": "module",
