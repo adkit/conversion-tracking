@@ -1,6 +1,6 @@
 {
     "name": "@adkit/google-ads-tracking",
-    "version": "1.1.1",
+    "version": "1.1.2",
     "description": "Google Ads conversion tracking for JavaScript and TypeScript. Zero-dependency gtag.js wrapper with eager, lazy, and manual script loading.",
     "homepage": "https://adkit.so",
     "repository": {

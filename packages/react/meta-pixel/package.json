@@ -1,6 +1,6 @@
 {
   "name": "@adkit/meta-pixel-react",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Meta (Facebook) Pixel for React. Provider and hook with type-safe events, Conversions API deduplication, and lazy script loading.",
   "homepage": "https://adkit.so",
   "repository": {
