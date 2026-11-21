@@ -98,7 +98,59 @@ describe('Meta Pixel Nuxt runtime loading', () => {
     expect(metaTestState.track).toHaveBeenCalledOnce()
   })
 
-  it('initializes its configured pixel when another integration already installed fbq', () => {
+  it('tracks one PageView when Nuxt replays the initial route', () => {
+    setNuxtAppTestState({
+      config: {
+        public: {
+          metaPixel: {
+            pixelIds: 'pixel-1',
+            autoTrackPageView: true,
+            debug: false,
+            enableLocalhost: true,
+            loadMode: 'manual',
+            excludedRoutes: [],
+            includedRoutes: [],
+          },
+        },
+      },
+      route: { path: '/store', meta: {} },
+    })
+
+    ;(plugin as () => void)()
+    expect(metaTestState.init).toHaveBeenCalledOnce()
+
+    navigateInNuxtAppTest({ path: '/store', meta: {} })
+    expect(metaTestState.track).not.toHaveBeenCalled()
+
+    navigateInNuxtAppTest({ path: '/checkout', meta: {} })
+    expect(metaTestState.track).toHaveBeenCalledOnce()
+  })
+
+  it('does not track a PageView for a navigation that failed', () => {
+    setNuxtAppTestState({
+      config: {
+        public: {
+          metaPixel: {
+            pixelIds: 'pixel-1',
+            autoTrackPageView: true,
+            debug: false,
+            enableLocalhost: true,
+            loadMode: 'manual',
+            excludedRoutes: [],
+            includedRoutes: [],
+          },
+        },
+      },
+      route: { path: '/store', meta: {} },
+    })
+
+    ;(plugin as () => void)()
+
+    navigateInNuxtAppTest({ path: '/checkout', meta: {} }, new Error('navigation aborted'))
+    expect(metaTestState.track).not.toHaveBeenCalled()
+  })
+
+
     metaTestState.loaded = true
     metaTestState.initialized = false
     setNuxtAppTestState({

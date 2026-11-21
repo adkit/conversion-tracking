@@ -3,9 +3,15 @@ interface TestRoute {
   meta: Record<string, unknown>
 }
 
+interface NavigatedTestRoute extends TestRoute {
+  fullPath: string
+}
+
+type AfterEachCallback = (to: NavigatedTestRoute, from: NavigatedTestRoute, failure?: unknown) => void
+
 let runtimeConfig: Record<string, unknown> = {}
 let currentRoute: TestRoute = { path: '/', meta: {} }
-let afterEachCallback: ((route: TestRoute) => void) | undefined
+let afterEachCallback: AfterEachCallback | undefined
 
 export const defineNuxtPlugin = <T>(plugin: T): T => plugin
 
@@ -14,7 +20,7 @@ export const useRuntimeConfig = () => runtimeConfig
 export const useRoute = () => currentRoute
 
 export const useRouter = () => ({
-  afterEach(callback: (route: TestRoute) => void) {
+  afterEach(callback: AfterEachCallback) {
     afterEachCallback = callback
   },
 })
@@ -28,7 +34,11 @@ export const setNuxtAppTestState = (input: {
   afterEachCallback = undefined
 }
 
-export const navigateInNuxtAppTest = (route: TestRoute) => {
+const withFullPath = (route: TestRoute): NavigatedTestRoute => ({ ...route, fullPath: route.path })
+
+export const navigateInNuxtAppTest = (route: TestRoute, failure?: unknown) => {
   if (!afterEachCallback) throw new Error('Nuxt afterEach callback was not registered')
-  afterEachCallback(route)
+  const from = withFullPath(currentRoute)
+  if (!failure) currentRoute = route
+  afterEachCallback(withFullPath(route), from, failure)
 }

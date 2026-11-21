@@ -7,6 +7,12 @@ interface RouteMeta {
     metaPixel?: boolean;
 }
 
+interface NavigatedRoute {
+    path: string;
+    fullPath: string;
+    meta: RouteMeta;
+}
+
 export default defineNuxtPlugin(() => {
     if (!import.meta.client) return;
 
@@ -114,7 +120,11 @@ export default defineNuxtPlugin(() => {
     }
 
     // Handle route changes (SPA navigation)
-    router.afterEach((to: { path: string; meta: RouteMeta }) => {
+    router.afterEach((to: NavigatedRoute, from: NavigatedRoute, failure?: unknown) => {
+        // Nuxt replays the initial route after plugins run, and init() already tracked that PageView
+        const stayedOnSameUrl = to.fullPath === from.fullPath;
+        if (failure || stayedOnSameUrl) return;
+
         if (isAllowed(to.path, to.meta)) {
             if (!META.isInitialized()) {
                 // Initialize if this package has not configured its pixel IDs yet
